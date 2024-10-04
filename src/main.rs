@@ -1,3 +1,6 @@
+mod problems;
+use problems::array::easy::missing_element_in_array as current_problem;
+
 fn main() {
-    println!("Hello, world!");
+    current_problem::brute();
 }
