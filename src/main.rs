@@ -1,7 +1,7 @@
 mod problems;
 mod utils;
-use problems::array::easy::missing_element_in_array as current_problem;
+use problems::array::easy::find_max_consecutive_ones as current_problem;
 
 fn main() {
-    current_problem::optimal_xor();
+    current_problem::optimal();
 }

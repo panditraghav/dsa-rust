@@ -107,3 +107,27 @@ pub mod missing_element_in_array {
         println!("The missing number is {}", xor1 ^ xor2);
     }
 }
+
+pub mod find_max_consecutive_ones {
+    use crate::utils::input::get_input_vector;
+
+    pub fn optimal() {
+        println!("find_max_consecutive_ones: optimal");
+        let arr = get_input_vector(8);
+
+        let mut counter = 0;
+        let mut max = 0;
+        for i in arr {
+            if i == 1 {
+                counter += 1;
+                if counter > max {
+                    max = counter
+                }
+            } else {
+                counter = 0;
+            }
+        }
+
+        println!("Maximum consecutive ones are: {}", max);
+    }
+}
