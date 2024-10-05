@@ -131,3 +131,54 @@ pub mod find_max_consecutive_ones {
         println!("Maximum consecutive ones are: {}", max);
     }
 }
+
+/// Find the number that appears once given that
+/// other number in this array appears twice
+pub mod find_num_that_appears_once {
+    use std::collections::HashMap;
+
+    use crate::utils::input::get_input_vector;
+
+    /// Using nested loop
+    pub fn brute() {
+        todo!(
+            r#"Use nested loops to linear search every element and 
+        see if there is an element for whome another element 
+        was not found"#
+        );
+    }
+
+    /// Using HashMap
+    pub fn better() {
+        println!("find_num_that_appears_once: better");
+        let arr = get_input_vector(7);
+
+        let mut count_map: HashMap<i32, u8> = HashMap::new();
+
+        for i in arr {
+            if let Some(v) = count_map.insert(i, 1) {
+                *count_map.get_mut(&i).unwrap() += v;
+            }
+        }
+
+        for (key, val) in count_map {
+            if val == 1 {
+                println!("The number that appears once is: {}", key);
+                return;
+            }
+        }
+    }
+
+    /// Using xor operations
+    pub fn optimal() {
+        println!("find_num_that_appears_once: optimal");
+        let arr = get_input_vector(7);
+
+        let mut num_once = 0;
+        for i in arr {
+            num_once ^= i;
+        }
+
+        println!("The number that appeared once is {}", num_once);
+    }
+}
