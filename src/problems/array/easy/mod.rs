@@ -80,4 +80,30 @@ pub mod missing_element_in_array {
             i32::from(sum_of_first_n_num) - sum_of_arr
         );
     }
+
+    /// Using xor operation
+    /// n ^ n = 0;
+    /// n ^ 0 = n;
+    /// by this logic we first calculate xor of first n natural numbers (1 ^ 2 ^ 3 ^ 4 ^ 5)
+    /// And then calculate xor of all numbers of array (1 ^ 2 ^ 4 ^ 5)
+    /// Then we xor these two values, all the same numbers will become 0
+    /// and the missing number ^ 0 will give us missing number;
+    pub fn optimal_xor() {
+        println!("missing_element_in_array: optimal_xor");
+
+        let (arr, size) = take_input();
+        println!("Array is:- {arr:?}");
+
+        let mut xor1 = 0;
+        let mut xor2: u32 = 0;
+
+        for i in 0..(u32::from(size) - 1) {
+            xor1 ^= i + 1;
+            let v = arr.get(usize::try_from(i).unwrap()).unwrap().unsigned_abs();
+            xor2 ^= v;
+        }
+        xor1 ^= u32::from(size);
+
+        println!("The missing number is {}", xor1 ^ xor2);
+    }
 }
