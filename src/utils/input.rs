@@ -1,6 +1,6 @@
 use std::io::stdin;
 
-pub fn get_input_vector(size: u32) -> Vec<i32> {
+pub fn get_input_vector(size: u8) -> Vec<i32> {
     let mut arr: Vec<i32> = Vec::new();
     println!("Enter {} elements for array:-", size);
     for i in 1..(size + 1) {

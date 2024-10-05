@@ -10,7 +10,7 @@ pub mod missing_element_in_array {
         stdin().read_line(&mut num_str).unwrap();
         let num_int = num_str.trim().parse::<u8>().unwrap();
 
-        (get_input_vector(u32::from(num_int - 1)), num_int)
+        (get_input_vector(num_int - 1), num_int)
     }
     /// Using nested loop
     pub fn brute() {
@@ -57,5 +57,27 @@ pub mod missing_element_in_array {
             };
         }
         println!("The missing number is {not_found}");
+    }
+
+    /// Using the sum of first n natural number formula to find `sum_of_first_n_num`
+    /// and subtracting `sum_of_arr` from it to find the missing number.
+    /// The difference will be the missing number!
+    pub fn optimal() {
+        println!("missing_element_in_array: optimal");
+
+        let (arr, size) = take_input();
+        println!("Array is:- {arr:?}");
+
+        let sum_of_first_n_num = size * (size + 1) / 2;
+        let mut sum_of_arr = 0;
+
+        for i in arr {
+            sum_of_arr += i;
+        }
+
+        println!(
+            "The missing number is {}",
+            i32::from(sum_of_first_n_num) - sum_of_arr
+        );
     }
 }
