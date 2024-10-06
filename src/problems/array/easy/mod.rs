@@ -4,11 +4,11 @@ pub mod missing_element_in_array {
     use crate::utils::input::get_input_vector;
     use std::{collections::HashMap, io::stdin};
 
-    fn take_input() -> (Vec<i32>, u8) {
+    fn take_input() -> (Vec<i32>, usize) {
         println!("Enter number of elements: ");
         let mut num_str = String::new();
         stdin().read_line(&mut num_str).unwrap();
-        let num_int = num_str.trim().parse::<u8>().unwrap();
+        let num_int = num_str.trim().parse::<usize>().unwrap();
 
         (get_input_vector(num_int - 1), num_int)
     }
@@ -18,7 +18,7 @@ pub mod missing_element_in_array {
         let (arr, size) = take_input();
         println!("Array is:- {arr:?}");
 
-        for i in 1..(i32::from(size)) {
+        for i in 1..(i32::try_from(size).unwrap()) {
             let mut found: bool = false;
             for j in arr.iter() {
                 if *j == i {
@@ -45,9 +45,9 @@ pub mod missing_element_in_array {
             map.insert(i, 1);
         }
 
-        let mut not_found: u8 = 0;
+        let mut not_found: usize = 0;
         for i in 1..size {
-            let val = map.get(&i32::from(i));
+            let val = map.get(&i32::try_from(i).unwrap());
             match val {
                 None => {
                     not_found = i;
@@ -77,7 +77,7 @@ pub mod missing_element_in_array {
 
         println!(
             "The missing number is {}",
-            i32::from(sum_of_first_n_num) - sum_of_arr
+            i32::try_from(sum_of_first_n_num).unwrap() - sum_of_arr
         );
     }
 
@@ -94,15 +94,15 @@ pub mod missing_element_in_array {
         let (arr, size) = take_input();
         println!("Array is:- {arr:?}");
 
-        let mut xor1 = 0;
-        let mut xor2: u32 = 0;
+        let mut xor1: usize = 0;
+        let mut xor2: usize = 0;
 
-        for i in 0..(u32::from(size) - 1) {
+        for i in 0..(size - 1) {
             xor1 ^= i + 1;
             let v = arr.get(usize::try_from(i).unwrap()).unwrap().unsigned_abs();
-            xor2 ^= v;
+            xor2 ^= usize::try_from(v).unwrap();
         }
-        xor1 ^= u32::from(size);
+        xor1 ^= size;
 
         println!("The missing number is {}", xor1 ^ xor2);
     }
@@ -180,5 +180,121 @@ pub mod find_num_that_appears_once {
         }
 
         println!("The number that appeared once is {}", num_once);
+    }
+}
+
+/// Given an array and a sum k, we need to print the length of the longest subarray that sums to k
+pub mod longest_subarray_with_given_sum_positive {
+    use std::{cmp::max_by, collections::HashMap, io::stdin};
+
+    use crate::utils::input::get_input_vector;
+
+    fn take_inputs() -> (Vec<i32>, i32) {
+        println!("Enter size of array: ");
+        let mut arr_size_str = String::new();
+        stdin().read_line(&mut arr_size_str).unwrap();
+        let arr_size = arr_size_str.trim().parse::<usize>().unwrap();
+
+        let arr = get_input_vector(arr_size);
+
+        println!("Enter sum: ");
+        let mut input_num_str = String::new();
+        stdin().read_line(&mut input_num_str).unwrap();
+        let k = input_num_str.trim().parse::<i32>().unwrap();
+
+        (arr, k)
+    }
+
+    /// Find sum of all sub arrays, and return the max
+    pub fn brute() {
+        println!("longest_subarray_with_given_sum: brute");
+
+        let (arr, k) = take_inputs();
+
+        let mut longest_subarray_len: usize = 0;
+
+        for i in 0..(arr.len()) {
+            let mut sum = 0;
+            for j in i..(arr.len()) {
+                sum += arr[j];
+                if sum == k {
+                    longest_subarray_len =
+                        max_by(longest_subarray_len, j - i + 1, |x: &usize, y: &usize| {
+                            x.cmp(y)
+                        });
+                }
+                if sum > k {
+                    break;
+                }
+            }
+        }
+        println!("Longest subarray is of size {}", longest_subarray_len);
+    }
+
+    /// Using hashmap to keep track of sum at all the indexes
+    pub fn better() {
+        println!("longest_subarray_with_given_sum: better");
+        let (arr, k) = take_inputs();
+
+        let mut longest_subarray_len: usize = 0;
+
+        // storing the <sum_of_subarray_from_index_0_to_n, n>
+        let mut len_map: HashMap<i32, usize> = HashMap::new();
+
+        let mut temp_sum = 0;
+        for i in 0..(arr.len()) {
+            temp_sum += arr[i];
+
+            len_map.insert(temp_sum, i);
+            if temp_sum == k {
+                longest_subarray_len =
+                    max_by(longest_subarray_len, i + 1, |x: &usize, y: &usize| x.cmp(y));
+            }
+
+            let diff = temp_sum - k;
+
+            // Since the hashmap stores the sum at any index then if there is any
+            // key which is the difference between current_sum and k then sub array from
+            // one index after that till i will have sum k
+            if let Some(v) = len_map.get(&diff) {
+                longest_subarray_len =
+                    max_by(longest_subarray_len, i - v, |x: &usize, y: &usize| x.cmp(y));
+            }
+        }
+        println!("Longest subarray is of size {}", longest_subarray_len);
+    }
+
+    /// Using two pointers
+    pub fn optimal() {
+        println!("longest_subarray_with_given_sum: optimal");
+        let (arr, k) = take_inputs();
+
+        let mut left: usize = 0;
+        let mut right: usize = 0;
+        let mut longest_subarray_len: usize = 0;
+
+        let mut sum = 0;
+
+        while left != arr.len() - 1 {
+            if sum > k || right == arr.len() {
+                sum -= arr[left];
+                left += 1;
+            } else {
+                sum += arr[right];
+                if right < arr.len() {
+                    right += 1;
+                }
+            }
+            if sum == k {
+                // Because we have incremented right so not adding 1
+                longest_subarray_len = max_by(
+                    longest_subarray_len,
+                    right - left,
+                    |x: &usize, y: &usize| x.cmp(y),
+                );
+            }
+            println!("left: {}, right:{}, sum: {}", left, right - 1, sum);
+        }
+        println!("Longest subarray is of size {}", longest_subarray_len);
     }
 }

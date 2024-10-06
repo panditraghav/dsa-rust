@@ -1,7 +1,7 @@
 mod problems;
 mod utils;
-use problems::array::easy::find_num_that_appears_once as current_problem;
+use problems::array::easy::longest_subarray_with_given_sum_positive as current_problem;
 
 fn main() {
-    current_problem::better();
+    current_problem::optimal();
 }

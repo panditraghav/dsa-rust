@@ -1,13 +1,23 @@
 use std::io::stdin;
 
-pub fn get_input_vector(size: u8) -> Vec<i32> {
+pub fn get_input_vector(size: usize) -> Vec<i32> {
     let mut arr: Vec<i32> = Vec::new();
-    println!("Enter {} elements for array:-", size);
-    for i in 1..(size + 1) {
-        println!("Enter element {}", i);
-        let mut num_str = String::new();
-        stdin().read_line(&mut num_str).unwrap();
-        let num_int = num_str.trim().parse::<i32>().unwrap();
+    println!("Enter {} elements for array (separated by spaces):-", size);
+
+    let mut num_str = String::new();
+    stdin().read_line(&mut num_str).unwrap();
+
+    let split_arr: Vec<&str> = num_str.trim().split(" ").collect();
+    if split_arr.len() != size {
+        panic!(
+            "The size of input array {in_size} is not equal to {size}",
+            in_size = split_arr.len(),
+            size = size
+        );
+    }
+
+    for s in split_arr {
+        let num_int = s.trim().parse::<i32>().unwrap();
         arr.push(num_int);
     }
     arr
