@@ -189,6 +189,12 @@ pub mod longest_subarray_with_given_sum_positive {
 
     use crate::utils::input::get_input_vector;
 
+    #[derive(Debug)]
+    struct SubArray {
+        left: usize,
+        right: usize,
+    }
+
     fn take_inputs() -> (Vec<i32>, i32) {
         println!("Enter size of array: ");
         let mut arr_size_str = String::new();
@@ -212,23 +218,24 @@ pub mod longest_subarray_with_given_sum_positive {
         let (arr, k) = take_inputs();
 
         let mut longest_subarray_len: usize = 0;
+        let mut size_sub_arr: HashMap<usize, SubArray> = HashMap::new();
 
         for i in 0..(arr.len()) {
             let mut sum = 0;
             for j in i..(arr.len()) {
                 sum += arr[j];
-                if sum == k {
-                    longest_subarray_len =
-                        max_by(longest_subarray_len, j - i + 1, |x: &usize, y: &usize| {
-                            x.cmp(y)
-                        });
+                if sum == k && j - i + 1 > longest_subarray_len {
+                    longest_subarray_len = j - i + 1;
+                    size_sub_arr.insert(longest_subarray_len, SubArray { left: i, right: j });
                 }
                 if sum > k {
                     break;
                 }
             }
         }
+        let sub_array = size_sub_arr.get(&longest_subarray_len).unwrap();
         println!("Longest subarray is of size {}", longest_subarray_len);
+        println!("The subarray is: {:?}", sub_array);
     }
 
     /// Using hashmap to keep track of sum at all the indexes
@@ -271,30 +278,36 @@ pub mod longest_subarray_with_given_sum_positive {
 
         let mut left: usize = 0;
         let mut right: usize = 0;
-        let mut longest_subarray_len: usize = 0;
+        let mut sum = arr[0];
+        let mut longest_subarray_len: usize = 1;
+        let mut size_sub_arr: HashMap<usize, SubArray> = HashMap::new();
+        let n = arr.len();
 
-        let mut sum = 0;
-
-        while left != arr.len() - 1 {
-            if sum > k || right == arr.len() {
+        while left < n - 1 {
+            if left < right && sum > k {
                 sum -= arr[left];
                 left += 1;
-            } else {
+                println!("left: {}, right: {}, sum: {}", left, right, sum);
+                if sum == k {
+                    longest_subarray_len =
+                        max_by(longest_subarray_len, right - left + 1, |x, y| x.cmp(y));
+                }
+                continue;
+            }
+
+            if right < n - 1 {
+                right += 1;
                 sum += arr[right];
-                if right < arr.len() {
-                    right += 1;
+                if sum == k && right - left + 1 > longest_subarray_len {
+                    longest_subarray_len = right - left + 1;
+                    size_sub_arr.insert(longest_subarray_len, SubArray { left, right });
                 }
             }
-            if sum == k {
-                // Because we have incremented right so not adding 1
-                longest_subarray_len = max_by(
-                    longest_subarray_len,
-                    right - left,
-                    |x: &usize, y: &usize| x.cmp(y),
-                );
-            }
-            println!("left: {}, right:{}, sum: {}", left, right - 1, sum);
+            println!("left: {}, right: {}, sum: {}", left, right, sum);
         }
+
+        let sub_array = size_sub_arr.get(&longest_subarray_len).unwrap();
         println!("Longest subarray is of size {}", longest_subarray_len);
+        println!("The subarray is: {:?}", sub_array);
     }
 }
