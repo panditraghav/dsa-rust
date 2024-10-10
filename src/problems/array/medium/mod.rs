@@ -197,4 +197,45 @@ pub mod sort_array_consisting_zero_one_two {
         }
         println!("Sorted array is: {:?}", arr);
     }
+
+    /// Using dutch national flag algorithm
+    /// This algorithm uses 3 pointers: low, mid, high
+    /// It follows 4 rules
+    /// 1. {0..(low -1)} => should be 0 (Extreme left)
+    /// 2. {low...(mid -1)} => should be 1 (Mid portion)
+    /// 3. {mid...high} => Any random numbers
+    /// 4. {(high+1)...(n-1)} => should be 2 (End portion)
+    ///
+    /// So the hypothetical array will be something like this:-
+    /// {0..(low-1),low...(mid -1),mid...high,(high+1)...(n-1)}
+    /// ----0------|------1------|random_num|-------2--------
+    pub fn optimal() {
+        let mut arr = take_input();
+
+        let mut low: usize = 0;
+        let mut mid: usize = 0;
+        let mut high: usize = arr.len() - 1;
+
+        while mid <= high {
+            match arr[mid] {
+                0 => {
+                    arr.swap(mid, low);
+
+                    low += 1;
+                    mid += 1;
+                }
+                1 => {
+                    mid += 1;
+                }
+                2 => {
+                    arr.swap(mid, high);
+
+                    high -= 1;
+                }
+                _ => (),
+            }
+        }
+
+        println!("The sorted array is: {:?}", arr);
+    }
 }
