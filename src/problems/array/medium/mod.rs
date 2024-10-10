@@ -300,4 +300,43 @@ pub mod majority_element {
             }
         }
     }
+
+    /// # Using Moore’s Voting Algorithm
+    /// Here we are taking two variables element and count
+    /// We see if some element is majority or not in a subarray
+    /// if count becomes 0 then it is not majority in that subarray
+    /// and if at the last subarray count is not 0 then that means that
+    /// there is some element which is majority in that subarray,
+    /// and will be in the whole if majority element is there
+    pub fn optimal() {
+        let arr = take_input();
+        let mut el = arr[0];
+        let mut count = 1;
+
+        for i in &arr {
+            if count == 0 {
+                el = *i;
+            }
+            if *i == el {
+                count += 1;
+            } else {
+                count -= 1;
+            }
+        }
+        if count == 0 {
+            println!("No majority element found!");
+            return;
+        }
+        count = 0;
+        for i in &arr {
+            if el == *i {
+                count += 1;
+            }
+        }
+        if count > arr.len() / 2 {
+            println!("Found the majority_element: {}", el);
+        } else {
+            println!("No majority element found!");
+        }
+    }
 }
