@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use std::fmt::Debug;
 use std::fs::File;
 use std::io::{stdin, BufRead, BufReader};
