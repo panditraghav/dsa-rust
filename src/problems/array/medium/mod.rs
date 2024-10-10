@@ -108,7 +108,7 @@ pub mod two_sum {
 
         let mut indexes: Option<Indexes> = None;
 
-        while (left < right) {
+        while left < right {
             let current_sum = arr[left] + arr[right];
 
             match current_sum.cmp(&sum) {
@@ -339,5 +339,23 @@ pub mod majority_element {
         } else {
             println!("No majority element found!");
         }
+    }
+}
+
+/// Given an integer array arr, find the contiguous subarray (containing at least one number) which
+/// has the largest sum and returns its sum and prints the subarray.
+pub mod max_subarray_sum {
+
+    use std::fs::File;
+    use std::io::BufReader;
+
+    use crate::utils::input::get_vector_from_buf_reader;
+
+    pub fn brute() {
+        let file = File::open("./inputs.txt").unwrap();
+        let mut file_reader = BufReader::new(file);
+
+        let arr = get_vector_from_buf_reader::<i32>(&mut file_reader);
+        println!("The vector is {:?}", arr);
     }
 }
