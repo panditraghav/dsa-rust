@@ -136,3 +136,65 @@ pub mod two_sum {
         };
     }
 }
+
+/// Given an array consisting of only 0s, 1s, and 2s.
+/// Write a program to in-place sort the array without using inbuilt sort functions.
+/// ( Expected: Single pass-O(N) and constant space)
+pub mod sort_array_consisting_zero_one_two {
+    use crate::utils::input::{get_input_vector, get_num_input};
+
+    fn take_input() -> Vec<i32> {
+        println!("Enter number of elements: ");
+        let num_element: usize = get_num_input();
+
+        get_input_vector(num_element)
+    }
+
+    /// Sorting array, complexity O(nlogn)
+    pub fn brute() {
+        let mut arr = take_input();
+
+        arr.sort();
+        println!("Sorted array is: {:?}", arr);
+    }
+
+    /// Getting count of 0s, 1s and 2s in one iteration
+    /// And replacing the elements on second iteration using the count
+    pub fn better() {
+        let mut arr = take_input();
+
+        let mut zero_count = 0;
+        let mut one_count = 0;
+        let mut two_count = 0;
+
+        for i in arr.iter() {
+            match *i {
+                0 => {
+                    zero_count += 1;
+                }
+                1 => {
+                    one_count += 1;
+                }
+                2 => {
+                    two_count += 1;
+                }
+                _ => {}
+            }
+        }
+
+        let mut i = 0;
+        for _ in 0..zero_count {
+            arr[i] = 0;
+            i += 1;
+        }
+        for _ in 0..one_count {
+            arr[i] = 1;
+            i += 1;
+        }
+        for _ in 0..two_count {
+            arr[i] = 2;
+            i += 1;
+        }
+        println!("Sorted array is: {:?}", arr);
+    }
+}
