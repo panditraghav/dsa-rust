@@ -244,6 +244,8 @@ pub mod sort_array_consisting_zero_one_two {
 /// that occurs more than N/2 times in the given array.
 /// You may consider that such an element always exists in the array
 pub mod majority_element {
+    use std::collections::HashMap;
+
     use crate::utils::input::{get_input_vector, get_num_input};
 
     fn take_input() -> Vec<i32> {
@@ -254,7 +256,8 @@ pub mod majority_element {
         get_input_vector(num_element)
     }
 
-    /// Using two for loops O(n^2)
+    /// Using two for loops to count each element
+    /// Complexity : O(n^2)
     pub fn brute() {
         let arr = take_input();
         let n = arr.len();
@@ -269,6 +272,30 @@ pub mod majority_element {
             }
             if current_count > n / 2 {
                 println!("Found the majority_element: {}", current);
+                break;
+            }
+        }
+    }
+
+    /// Using HashMap this will lead to one iteration of array
+    /// to insert elements into map and other iteration on the
+    /// hashmap
+    /// Complexity : O(nlogn) + O(n)
+    pub fn better() {
+        let arr = take_input();
+        let mut element_count_map: HashMap<&i32, usize> = HashMap::new();
+
+        for i in &arr {
+            if let Some(old) = element_count_map.get_mut(i) {
+                *old += 1;
+            } else {
+                element_count_map.insert(i, 1);
+            }
+        }
+
+        for (k, v) in element_count_map {
+            if v > arr.len() / 2 {
+                println!("Found the majority_element: {}", k);
                 break;
             }
         }
