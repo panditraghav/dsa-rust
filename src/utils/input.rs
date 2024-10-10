@@ -1,4 +1,4 @@
-use std::io::stdin;
+use std::{io::stdin, os::unix::process, str::FromStr};
 
 pub fn get_input_vector(size: usize) -> Vec<i32> {
     let mut arr: Vec<i32> = Vec::new();
@@ -21,4 +21,21 @@ pub fn get_input_vector(size: usize) -> Vec<i32> {
         arr.push(num_int);
     }
     arr
+}
+
+pub fn get_num_input<T>() -> T
+where
+    T: FromStr,
+{
+    let mut num_str = String::new();
+    stdin().read_line(&mut num_str).unwrap();
+    let num_int = num_str.trim().parse::<T>();
+
+    match num_int {
+        Ok(t) => t,
+        Err(_) => {
+            eprintln!("Some error occured while parsing string");
+            panic!();
+        }
+    }
 }
