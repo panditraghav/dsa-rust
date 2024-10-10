@@ -239,3 +239,38 @@ pub mod sort_array_consisting_zero_one_two {
         println!("The sorted array is: {:?}", arr);
     }
 }
+
+/// Given an array of N integers, write a program to return an element
+/// that occurs more than N/2 times in the given array.
+/// You may consider that such an element always exists in the array
+pub mod majority_element {
+    use crate::utils::input::{get_input_vector, get_num_input};
+
+    fn take_input() -> Vec<i32> {
+        println!("Enter number of elements: ");
+        let num_element: usize = get_num_input();
+        println!("{} / 2 = {}", num_element, num_element / 2);
+
+        get_input_vector(num_element)
+    }
+
+    /// Using two for loops O(n^2)
+    pub fn brute() {
+        let arr = take_input();
+        let n = arr.len();
+
+        for i in 0..n {
+            let current = arr[i];
+            let mut current_count: usize = 0;
+            for j in &arr {
+                if *j == current {
+                    current_count += 1;
+                }
+            }
+            if current_count > n / 2 {
+                println!("Found the majority_element: {}", current);
+                break;
+            }
+        }
+    }
+}
