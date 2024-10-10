@@ -1,7 +1,7 @@
-use std::{io::stdin, os::unix::process, str::FromStr};
+use std::{io::stdin, str::FromStr};
 
 pub fn get_input_vector(size: usize) -> Vec<i32> {
-    let mut arr: Vec<i32> = Vec::new();
+    let mut arr: Vec<i32> = vec![0; size];
     println!("Enter {} elements for array (separated by spaces):-", size);
 
     let mut num_str = String::new();
@@ -16,9 +16,9 @@ pub fn get_input_vector(size: usize) -> Vec<i32> {
         );
     }
 
-    for s in split_arr {
-        let num_int = s.trim().parse::<i32>().unwrap();
-        arr.push(num_int);
+    for i in 0..size {
+        let num_int = split_arr[i].trim().parse::<i32>().unwrap();
+        arr[i] = num_int;
     }
     arr
 }
