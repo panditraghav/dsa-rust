@@ -53,6 +53,7 @@ pub fn optimal() {
         }
         arr.swap(bp, next_greatest);
 
+        // Sorting the portion after breakpoint element to make that portion smallest
         let arr_slice_after_breakpoint = &mut arr[(bp + 1)..n];
         arr_slice_after_breakpoint.sort();
 
