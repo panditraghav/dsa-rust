@@ -49,24 +49,12 @@ where
     T: FromStr,
     <T as FromStr>::Err: Debug,
 {
-    let mut size_str = String::new();
-    file_reader.read_line(&mut size_str).unwrap();
-    let size = size_str.trim().parse::<usize>().unwrap();
-
     let mut vec_str = String::new();
     file_reader.read_line(&mut vec_str).unwrap();
 
     let split_arr: Vec<&str> = vec_str.trim().split(" ").collect();
 
-    if split_arr.len() != size {
-        panic!(
-            "The size of input array {in_size} is not equal to {size}",
-            in_size = split_arr.len(),
-            size = size
-        );
-    }
-
-    let mut arr: Vec<T> = Vec::with_capacity(size);
+    let mut arr: Vec<T> = Vec::new();
 
     for item in split_arr {
         let num_int = (*item).trim().parse::<T>().unwrap();
