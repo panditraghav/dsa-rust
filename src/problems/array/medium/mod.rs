@@ -24,11 +24,38 @@ pub mod max_subarray_sum {
 
     use crate::utils::input::get_vector_from_buf_reader;
 
+    #[derive(Debug)]
+    struct SubArray {
+        i: usize,
+        j: usize,
+    }
+
+    /// Find sum of every subarray
     pub fn brute() {
         let file = File::open("./inputs.txt").unwrap();
         let mut file_reader = BufReader::new(file);
 
         let arr = get_vector_from_buf_reader::<i32>(&mut file_reader);
-        println!("The vector is {:?}", arr);
+        let n = arr.len();
+        println!("The input vector is {:?}", arr);
+
+        let mut max_sum = 0;
+        let mut sub_array: SubArray = SubArray { i: 0, j: 0 };
+
+        for i in 0..n {
+            let mut temp_sum = 0;
+            for j in i..n {
+                temp_sum += arr[j];
+                if temp_sum > max_sum {
+                    max_sum = temp_sum;
+                    sub_array.i = i;
+                    sub_array.j = j;
+                }
+            }
+        }
+        println!(
+            "The maximum subarray sum is: {}\n The subarray is: {:?}",
+            max_sum, sub_array
+        );
     }
 }
