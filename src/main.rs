@@ -3,5 +3,5 @@ mod utils;
 use problems::array::medium::max_subarray_sum as current_problem;
 
 fn main() {
-    current_problem::brute();
+    current_problem::optimal();
 }

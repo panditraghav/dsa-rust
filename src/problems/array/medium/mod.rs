@@ -30,12 +30,16 @@ pub mod max_subarray_sum {
         j: usize,
     }
 
-    /// Find sum of every subarray
-    pub fn brute() {
+    fn get_input() -> Vec<i32> {
         let file = File::open("./inputs.txt").unwrap();
         let mut file_reader = BufReader::new(file);
 
-        let arr = get_vector_from_buf_reader::<i32>(&mut file_reader);
+        get_vector_from_buf_reader::<i32>(&mut file_reader)
+    }
+
+    /// Find sum of every subarray
+    pub fn brute() {
+        let arr = get_input();
         let n = arr.len();
         println!("The input vector is {:?}", arr);
 
@@ -57,5 +61,28 @@ pub mod max_subarray_sum {
             "The maximum subarray sum is: {}\n The subarray is: {:?}",
             max_sum, sub_array
         );
+    }
+
+    /// Kadane's Algorithm
+    /// Whenever sum becomes -ve we make it 0 since, that won't add to subarray
+    /// If we add -ve then sum will decrease
+    pub fn optimal() {
+        let arr = get_input();
+        println!("Input array is: {:?}", arr);
+
+        let mut max_sum = arr[0];
+        let mut sum = 0;
+
+        for el in &arr {
+            sum += *el;
+
+            if sum > max_sum {
+                max_sum = sum;
+            }
+            if sum < 0 {
+                sum = 0;
+            }
+        }
+        println!("Maximum subarray sum is: {}", max_sum);
     }
 }
