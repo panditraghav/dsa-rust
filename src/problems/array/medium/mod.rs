@@ -25,3 +25,8 @@ pub mod max_subarray_sum;
 /// Return the maximum profit you can achieve from this transaction.
 /// If you cannot achieve any profit, return 0.
 pub mod stock_buy_sell;
+
+/// There’s an array ‘A’ of size ‘N’ with an equal number of positive and negative elements.
+/// Without altering the relative order of positive and negative elements,
+/// you must return an array of alternately positive and negative values.
+pub mod rearrange_elements_by_sign;
