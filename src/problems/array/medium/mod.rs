@@ -30,3 +30,15 @@ pub mod stock_buy_sell;
 /// Without altering the relative order of positive and negative elements,
 /// you must return an array of alternately positive and negative values.
 pub mod rearrange_elements_by_sign;
+
+/// Given an array Arr[] of integers, rearrange the numbers of the given array
+/// into the lexicographically next greater permutation of numbers.
+/// # Example 1 :
+/// Input format:
+///  Arr[] = {1,3,2}
+/// Output
+/// : Arr[] = {2,1,3}
+/// ## Explanation:
+/// All permutations of {1,2,3} are {{1,2,3} , {1,3,2}, {2,13} , {2,3,1} , {3,1,2} , {3,2,1}}.
+/// So, the next permutation just after {1,3,2} is {2,1,3}.
+pub mod next_permutation;
