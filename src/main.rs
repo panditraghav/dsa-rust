@@ -1,7 +1,7 @@
 mod problems;
 mod utils;
-use problems::array::medium::leaders_in_array as current_problem;
+use problems::array::medium::longest_consecutive_sequence as current_problem;
 
 fn main() {
-    current_problem::optimal();
+    current_problem::brute();
 }
