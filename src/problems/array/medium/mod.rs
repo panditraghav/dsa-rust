@@ -42,3 +42,8 @@ pub mod rearrange_elements_by_sign;
 /// All permutations of {1,2,3} are {{1,2,3} , {1,3,2}, {2,13} , {2,3,1} , {3,1,2} , {3,2,1}}.
 /// So, the next permutation just after {1,3,2} is {2,1,3}.
 pub mod next_permutation;
+
+/// Given an array, print all the elements which are leaders.
+/// A Leader is an element that is greater than all of the elements
+/// on its right side in the array.
+pub mod leaders_in_array;
