@@ -38,8 +38,8 @@ pub fn brute() {
             break;
         }
 
-        for j in (i + 1)..n {
-            if e1 + arr[j] == sum {
+        for (j, el_j) in arr[(i + 1)..n].iter().enumerate() {
+            if e1 + *el_j == sum {
                 indexes = Some(Indexes { i, j });
                 break;
             }
@@ -59,23 +59,20 @@ pub fn brute() {
 /// Using hashmap
 pub fn better() {
     let (arr, sum) = take_input();
-    let n = arr.len();
     let mut index_map: HashMap<i32, usize> = HashMap::new();
 
     let mut indexes: Option<Indexes> = None;
 
-    for i in 0..n {
+    for (i, el_i) in arr.iter().enumerate() {
         if indexes.is_some() {
             break;
         }
-        let current_item = arr[i];
-
-        match index_map.get(&(sum - current_item)) {
+        match index_map.get(&(sum - *el_i)) {
             Some(index) => {
                 indexes = Some(Indexes { i, j: *index });
             }
             None => {
-                index_map.insert(current_item, i);
+                index_map.insert(*el_i, i);
             }
         }
     }

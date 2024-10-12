@@ -27,8 +27,8 @@ pub fn brute() {
 
     for i in 0..n {
         let mut temp_sum = 0;
-        for j in i..n {
-            temp_sum += arr[j];
+        for (j, j_el) in arr[i..n].iter().enumerate() {
+            temp_sum += *j_el;
             if temp_sum > max_sum {
                 max_sum = temp_sum;
                 sub_array.i = i;

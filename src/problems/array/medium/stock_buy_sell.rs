@@ -51,12 +51,12 @@ pub fn optimal() {
     let mut min_price = arr[0];
     let mut max_profit_days = ProfitDays { buy: 1, sell: 2 };
 
-    for i in 1..n {
-        if arr[i] < min_price {
-            min_price = arr[i];
+    for (i, el_i) in arr[1..n].iter().enumerate() {
+        if *el_i < min_price {
+            min_price = *el_i;
             max_profit_days.buy = i + 1;
-        } else if arr[i] - min_price > maximum_profit {
-            maximum_profit = arr[i] - min_price;
+        } else if *el_i - min_price > maximum_profit {
+            maximum_profit = *el_i - min_price;
             max_profit_days.sell = i + 1;
         }
     }
