@@ -68,4 +68,6 @@ pub mod leaders_in_array;
 ///  The longest consecutive subsequence is 5, 6, 7, and 8.
 pub mod longest_consecutive_sequence;
 
+/// Given a matrix if an element in the matrix is 0 then you will have
+/// to set its entire column and row to 0 and then return the matrix
 pub mod set_matrix_zero;
