@@ -44,7 +44,7 @@ where
     }
 }
 
-pub fn get_vector_from_buf_reader<T>(file_reader: &mut BufReader<File>) -> Vec<T>
+pub fn input_vector_from_buf_reader<T>(file_reader: &mut BufReader<File>) -> Vec<T>
 where
     T: FromStr,
     <T as FromStr>::Err: Debug,
@@ -62,7 +62,7 @@ where
     }
     arr
 }
-pub fn get_num_from_reader<T>(file_reader: &mut BufReader<File>) -> T
+pub fn input_get_num_from_reader<T>(file_reader: &mut BufReader<File>) -> T
 where
     T: FromStr,
 {

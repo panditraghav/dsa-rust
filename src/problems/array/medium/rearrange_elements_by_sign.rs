@@ -1,13 +1,13 @@
 use std::fs::File;
 use std::io::BufReader;
 
-use crate::utils::input::get_vector_from_buf_reader;
+use crate::utils::input::input_vector_from_buf_reader;
 
 fn get_input() -> Vec<i32> {
     let file = File::open("./inputs.txt").unwrap();
     let mut file_reader = BufReader::new(file);
 
-    get_vector_from_buf_reader::<i32>(&mut file_reader)
+    input_vector_from_buf_reader::<i32>(&mut file_reader)
 }
 
 /// We create two arrays one containing all positives and other all negatives
