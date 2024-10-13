@@ -1,6 +1,6 @@
 mod problems;
 mod utils;
-use problems::array::medium::longest_consecutive_sequence as current_problem;
+use problems::array::medium::set_matrix_zero as current_problem;
 
 fn main() {
     current_problem::brute();

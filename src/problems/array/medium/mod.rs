@@ -67,3 +67,5 @@ pub mod leaders_in_array;
 /// **Explanation**:
 ///  The longest consecutive subsequence is 5, 6, 7, and 8.
 pub mod longest_consecutive_sequence;
+
+pub mod set_matrix_zero;
