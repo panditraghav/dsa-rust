@@ -52,7 +52,7 @@ where
     let mut vec_str = String::new();
     file_reader.read_line(&mut vec_str).unwrap();
 
-    if vec_str == "" {
+    if vec_str.is_empty() {
         return None;
     }
 
