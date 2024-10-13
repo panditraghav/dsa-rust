@@ -89,6 +89,8 @@ where
     <T as FromStr>::Err: Debug,
 {
     let mut matrix: Vec<Vec<T>> = Vec::new();
-
+    while let Some(row) = input_vector_from_buf_reader::<T>(file_reader) {
+        matrix.push(row);
+    }
     matrix
 }
