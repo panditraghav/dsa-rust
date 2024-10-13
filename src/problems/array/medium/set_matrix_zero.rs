@@ -10,6 +10,13 @@ pub fn take_input() -> Vec<Vec<i32>> {
     input_matrix_from_buf_reader::<i32>(&mut file_reader)
 }
 
+/// Just iterating thrugh the matrix twice, first time to get which rows and cols
+/// are to be zeroed out and second time to zero them
+/// **Time Complexity**: O(2*N*M)
+/// There just one better approach which reduces space Complexity.
+/// In that the first row and first column of matrix itself is used to keep track
+/// of which row and col to be made zero, but that is not implementable in rust since
+/// we cannot take a mutable reference to a vector while a immutable reference is in scope.
 pub fn brute() {
     let mut mat = take_input();
     println!("The input matrix is: {:?}", mat);
