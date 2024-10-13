@@ -7,7 +7,7 @@ fn get_input() -> Vec<i32> {
     let file = File::open("./inputs.txt").unwrap();
     let mut file_reader = BufReader::new(file);
 
-    input_vector_from_buf_reader::<i32>(&mut file_reader)
+    input_vector_from_buf_reader::<i32>(&mut file_reader).unwrap()
 }
 
 /// Using 2 for loops comparing every element

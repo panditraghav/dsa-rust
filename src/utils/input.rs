@@ -44,13 +44,17 @@ where
     }
 }
 
-pub fn input_vector_from_buf_reader<T>(file_reader: &mut BufReader<File>) -> Vec<T>
+pub fn input_vector_from_buf_reader<T>(file_reader: &mut BufReader<File>) -> Option<Vec<T>>
 where
     T: FromStr,
     <T as FromStr>::Err: Debug,
 {
     let mut vec_str = String::new();
     file_reader.read_line(&mut vec_str).unwrap();
+
+    if vec_str == "" {
+        return None;
+    }
 
     let split_arr: Vec<&str> = vec_str.trim().split(" ").collect();
 
@@ -60,7 +64,7 @@ where
         let num_int = (*item).trim().parse::<T>().unwrap();
         arr.push(num_int);
     }
-    arr
+    Some(arr)
 }
 pub fn input_get_num_from_reader<T>(file_reader: &mut BufReader<File>) -> T
 where
@@ -77,4 +81,14 @@ where
             panic!();
         }
     }
+}
+
+pub fn input_matrix_from_buf_reader<T>(file_reader: &mut BufReader<File>) -> Vec<Vec<T>>
+where
+    T: FromStr,
+    <T as FromStr>::Err: Debug,
+{
+    let mut matrix: Vec<Vec<T>> = Vec::new();
+
+    matrix
 }
