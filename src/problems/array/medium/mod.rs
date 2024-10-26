@@ -71,3 +71,13 @@ pub mod longest_consecutive_sequence;
 /// Given a matrix if an element in the matrix is 0 then you will have
 /// to set its entire column and row to 0 and then return the matrix
 pub mod set_matrix_zero;
+
+/// Given a Matrix, print the given matrix in spiral order.
+/// # Example 1:
+/// **Input**: Matrix
+/// { { 1, 2, 3, 4 },
+/// { 5, 6, 7, 8 },
+/// { 9, 10, 11, 12 },
+/// { 13, 14, 15, 16 } }
+/// **Outhput**: 1, 2, 3, 4, 8, 12, 16, 15, 14, 13, 9, 5, 6, 7, 11, 10.
+pub mod print_matrix_spiral;
