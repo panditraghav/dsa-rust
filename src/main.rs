@@ -1,6 +1,6 @@
 mod problems;
 mod utils;
-use problems::array::medium::print_matrix_spiral as current_problem;
+use problems::array::hard::three_sum as current_problem;
 
 fn main() {
     current_problem::brute();

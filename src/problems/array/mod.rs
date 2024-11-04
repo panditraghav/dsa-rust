@@ -2,3 +2,5 @@
 pub mod easy;
 /// Medium array questions
 pub mod medium;
+
+pub mod hard;
