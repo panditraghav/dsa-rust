@@ -66,7 +66,7 @@ where
     }
     Some(arr)
 }
-pub fn input_get_num_from_reader<T>(file_reader: &mut BufReader<File>) -> T
+pub fn input_num_from_buf_reader<T>(file_reader: &mut BufReader<File>) -> Option<T>
 where
     T: FromStr,
 {
@@ -74,13 +74,7 @@ where
     file_reader.read_line(&mut num_str).unwrap();
     let num_int = num_str.trim().parse::<T>();
 
-    match num_int {
-        Ok(t) => t,
-        Err(_) => {
-            eprintln!("Some error occured while parsing string");
-            panic!();
-        }
-    }
+    num_int.ok()
 }
 
 pub fn input_matrix_from_buf_reader<T>(file_reader: &mut BufReader<File>) -> Vec<Vec<T>>
