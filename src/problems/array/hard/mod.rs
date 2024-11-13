@@ -19,3 +19,16 @@ pub mod largest_subarray_with_zero_sum;
 /// **Output**:
 ///  {{-1,-1,2},{-1,0,1}}
 pub mod three_sum;
+
+/// Given an array of integers A and an integer B.
+/// Find the total number of subarrays having bitwise XOR of all elements equal to k.
+///
+/// # Example 1:
+/// **Input**:
+///  A = {4, 2, 2, 6, 4} , k = 6
+/// **Result**:
+///  4
+/// **Explanation**:
+///  The subarrays having XOR of their elements as 6 are
+///  {4, 2}, {4, 2, 2, 6, 4}, {2, 2, 6}, {6}
+pub mod num_of_subarray_with_xor_k;
