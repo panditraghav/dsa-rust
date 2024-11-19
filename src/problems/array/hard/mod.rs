@@ -32,3 +32,17 @@ pub mod three_sum;
 ///  The subarrays having XOR of their elements as 6 are
 ///  {4, 2}, {4, 2, 2, 6, 4}, {2, 2, 6}, {6}
 pub mod num_of_subarray_with_xor_k;
+
+/// Given an array of intervals, merge all the overlapping
+/// intervals and return an array of non-overlapping intervals.
+///
+/// # Example 1:
+/// **Input**:
+///  intervals={{1,3},{2,6},{8,10},{15,18}}
+/// **Output**:
+///  {{1,6},{8,10},{15,18}}
+///
+/// **Explanation**:
+///  Since intervals {1,3} and {2,6} are overlapping we can merge them to form {1,6}
+///  intervals.
+pub mod merge_overlapping_subintervals;

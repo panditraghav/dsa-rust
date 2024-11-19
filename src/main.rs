@@ -1,8 +1,7 @@
 mod problems;
 mod utils;
-use problems::array::hard::num_of_subarray_with_xor_k as current_problem;
+use problems::array::hard::merge_overlapping_subintervals as current_problem;
 
 fn main() {
-    current_problem::brute();
     current_problem::optimal();
 }
