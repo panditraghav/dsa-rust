@@ -63,3 +63,19 @@ pub mod merge_overlapping_subintervals;
 /// arr1{} = {1 2 3 4}
 /// arr2{} = {8 9 10}
 pub mod merge_two_sorted_arrays;
+
+/// Problem Statement: You are given a read-only array of N integers
+/// with values also in the range [1, N] both inclusive.
+/// Each integer appears exactly once except A which appears twice and B which is missing.
+/// The task is to find the repeating and missing numbers A and B where A repeats twice and B is missing.
+///
+/// # Example 1:
+///
+/// **Input**
+/// :  array = {3,1,2,5,3}
+/// **Result**
+/// : {3,4}
+/// **Explanation**
+/// : A = 3 , B = 4
+/// Since 3 is appearing twice and 4 is missing
+pub mod find_repeating_and_missing_numbers;
